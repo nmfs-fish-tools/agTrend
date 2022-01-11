@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Stock Synthesis - Data Limited Tool</title>
+    <title>agTrend</title>
    <link type="text/css" rel="stylesheet" href="./static/simple.css" />
 
 </head>
 <body>
     <div class="container">
         <div class="mywrap">
-            <h1 class ="title">Stock Synthesis - Data Limited Tool
+            <h1 class ="title">agTrend
             </h1>
               
                <div class = "badge"  data-md-tooltip=badge_external_active id = badge_external_active> </div>
@@ -30,7 +30,7 @@
               
 
               
-              <button class = "codelink" title="link to download application" onclick=" window.open('https://github.com/shcaba/SS-DL-tool', '_blank'); return false;">
+              <button class = "codelink" title="link to download application" onclick=" window.open('https://github.com/dsjohnson/agTrend.gam', '_blank'); return false;">
                 Download Application
                 </button>
               
@@ -42,11 +42,11 @@
               
 
               
-                <button class = "codelink" title="link to code repository" onclick=" window.open('https://github.com/shcaba/SS-DL-tool', '_blank'); return false;">
+                <button class = "codelink" title="link to code repository" onclick=" window.open('https://github.com/dsjohnson/agTrend.gam', '_blank'); return false;">
                 Code Repository
                 </button>
               
-              <button class = "IconButton" title="e-mail tool owner" id ="email" onclick='location.href= "mailto:jason.cope@noaa.gov;"'>
+              <button class = "IconButton" title="e-mail tool owner" id ="email" onclick='location.href= "devin.johnson@noaa.gov;"'>
               </button>
 
         </div>
@@ -57,7 +57,7 @@
       <div class ="main">
         <div class="mywrap">
               <div class ="label">
-                Stock Synthesis Data-Limited Tool (SS-DL tool)
+                agTrend
 
               </div>
 
@@ -67,7 +67,7 @@
 
               
               
-              <img class = "versionButton" alt="GitHub release (latest by date)" src= https://img.shields.io/github/v/release/nmfs-fish-tools/SS-DL?color=%230093D0&include_prereleases&label=%20>
+              <img class = "versionButton" alt="GitHub release (latest by date)" src= https://img.shields.io/github/v/release/nmfs-fish-tools/agTrend?color=%230093D0&include_prereleases&label=%20>
               
 
 
@@ -85,7 +85,7 @@
         </div >
 
         <div class ="mainText">
-     The SS-DL tool uses Stock Synthesis to implement several common data-limited assessment methods all in one modelling framework. Under a unified modelling framework, additional data can be added as it becomes available. The tool builds Stock Synthesis files for provided data and life history information. It produces plots and tables for each model run via the r4ss package, as well as additional screen output for easy interpretation and provide a variety of additional applications to diagnose and explore model behavior. </div>
+     agTrend fits a log-linear trend models to regions aggregated over sites. The sites may contain missing surveys that are not temporally aligned with the missing data at other sites, making direct aggregation impossible. The functions within the package model the indivdual sites with a semi-parametric model to interpolate missing data from which regional aggregations can be made. After model fitting, one can sample from the posterior predictive distribution of the regional aggregations Then calculate the log-linear trend over the time period of interest as a derived parameter. Using the posterior predictive distribution allows incorporation of both parameter uncertainty as well as uncertainty due to sampling the local abundance processes. </div>
 
         <div class="mainText">
         
