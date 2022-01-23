@@ -2,15 +2,19 @@ name: "agTrend"
 navbar:
   title: "agTrend"
   left:
-    - text: "Home"
+    - icon: fa-fish fa-lg
       href: index.html
+    - text: "Online Application"
+      href: "#0"
+    - text: "Download Application"
+      href: "#0"
     - text: "Documentation"
-      href: documentation.html
+      href: "#0"
   right:
     - icon: fa-github fa-lg
       href: https://github.com/dsjohnson/agTrend.gam     
     - icon: fa-paper-plane fa-lg
-      href: mailto:admin@cloudhadoop.com   
+      href: mailto:devin.johnson@noaa.gov   
 output_dir: "."
 output:
   html_document:

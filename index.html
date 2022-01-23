@@ -321,10 +321,19 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-fish fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="documentation.html">Documentation</a>
+  <a href="#0">Online Application</a>
+</li>
+<li>
+  <a href="#0">Download Application</a>
+</li>
+<li>
+  <a href="#0">Documentation</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -335,7 +344,7 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="mailto:admin@cloudhadoop.com">
+  <a href="mailto:devin.johnson@noaa.gov">
     <span class="fa fa-paper-plane fa-lg"></span>
      
   </a>
@@ -354,10 +363,10 @@ div.tocify {
 </div>
 
 
-<p>Author: D. S. Johnson</p>
+<p>Author: <a href="https://github.com/dsjohnson">Devin S. Johnson</a></p>
 <div id="fit-regional-trends-to-site-specific-abundance-data" class="section level2">
 <h2>Fit regional trends to site-specific abundance data</h2>
-<p>agTrend package fits a log-linear trend models to regions aggregated over sites. The sites may contain missing surveys that are not temporally aligned with the missing data at other sites, making direct aggregation impossible. The functions within the package model the indivdual sites with a semi-parametric model to interpolate missing data from which regional aggregations can be made. After model fitting, one can sample from the posterior predictive distribution of the regional aggregations Then calculate the log-linear trend over the time period of interest as a derived parameter. Using the posterior predictive distribution allows incorporation of both parameter uncertainty as well as uncertainty due to sampling the local abundance processes.</p>
+<p>agTrend package fits a log-linear trend models to regions aggregated over sites. The sites may contain missing surveys that are not temporally aligned with the missing data at other sites, making direct aggregation impossible. The functions within the package model the individual sites with a semi-parametric model to interpolate missing data from which regional aggregations can be made. After model fitting, one can sample from the posterior predictive distribution of the regional aggregations Then calculate the log-linear trend over the time period of interest as a derived parameter. Using the posterior predictive distribution allows incorporation of both parameter uncertainty as well as uncertainty due to sampling the local abundance processes.</p>
 </div>
 <div id="example" class="section level2">
 <h2>Example</h2>

@@ -3,14 +3,14 @@ title: "agTrend"
 output: html_document
 ---
 
-Author: D. S. Johnson
+Author: [Devin S. Johnson](https://github.com/dsjohnson)
 
 ## Fit regional trends to site-specific abundance data
 
 agTrend package fits a log-linear trend models to regions aggregated over
 sites. The sites may contain missing surveys that are not temporally
 aligned with the missing data at other sites, making direct aggregation
-impossible. The functions within the package model the indivdual sites
+impossible. The functions within the package model the individual sites
 with a semi-parametric model to interpolate missing data from which
 regional aggregations can be made. After model fitting, one can sample
 from the posterior predictive distribution of the regional aggregations
