@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>agTrend</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="extra.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">agTrend</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="documentation.html">Documentation</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/dsjohnson/agTrend.gam">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:admin@cloudhadoop.com">
+    <span class="fa fa-paper-plane fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">agTrend</h1>
+
+</div>
+
+
+<p>Author: D. S. Johnson</p>
+<div id="fit-regional-trends-to-site-specific-abundance-data" class="section level2">
+<h2>Fit regional trends to site-specific abundance data</h2>
+<p>agTrend package fits a log-linear trend models to regions aggregated over sites. The sites may contain missing surveys that are not temporally aligned with the missing data at other sites, making direct aggregation impossible. The functions within the package model the indivdual sites with a semi-parametric model to interpolate missing data from which regional aggregations can be made. After model fitting, one can sample from the posterior predictive distribution of the regional aggregations Then calculate the log-linear trend over the time period of interest as a derived parameter. Using the posterior predictive distribution allows incorporation of both parameter uncertainty as well as uncertainty due to sampling the local abundance processes.</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>Load packages for this example</p>
+<pre class="r"><code>library(agTrend.gam)
+#&gt; Loading required package: coda
+#&gt; Loading required package: mgcv
+#&gt; Loading required package: nlme
+#&gt; This is mgcv 1.8-25. For overview type &#39;help(&quot;mgcv-package&quot;)&#39;.
+#&gt; Loading required package: tidyverse
+#&gt; ── Attaching packages ──────────── tidyverse 1.2.1 ──
+#&gt; ✔ ggplot2 3.1.0     ✔ purrr   0.2.5
+#&gt; ✔ tibble  1.4.2     ✔ dplyr   0.7.8
+#&gt; ✔ tidyr   0.8.2     ✔ stringr 1.3.1
+#&gt; ✔ readr   1.1.1     ✔ forcats 0.3.0
+#&gt; ── Conflicts ─────────────── tidyverse_conflicts() ──
+#&gt; ✖ dplyr::collapse() masks nlme::collapse()
+#&gt; ✖ dplyr::filter()   masks stats::filter()
+#&gt; ✖ dplyr::lag()      masks stats::lag()
+#&gt; Loading required package: mvtnorm
+#&gt; 
+#&gt;  agTrend.gam 0.01.9000 (2018-10-24) 
+#&gt;  A demo is available at https://github.com/dsjohnson/agTrend.gam</code></pre>
+<p>Now we can load the data that is included with the <code>agTrend.gam</code> package and filter it to the data we want for this example (i.e., 1990-2016). Now we’ll add a photo method covariate to data (oblique photos prior to 2004 surveys = 1)</p>
+<pre class="r"><code>data(wdpsNonpups)
+wdpsNonpups = wdpsNonpups %&gt;% filter(YEAR&gt;=1990 &amp; YEAR&lt;=2012) %&gt;% mutate(obl = as.integer(YEAR&lt;2004))</code></pre>
+<p>The data is then converted to the form necessary for the site abundance imputing function</p>
+<pre class="r"><code>fit_data = wdpsNonpups %&gt;% make.agtrend.data(abundance.name=COUNT, site.name=SITE, time.name=YEAR) </code></pre>
+<p>Now, we count the number of positive counts at each site so that we can remove sites that had only 1 positive count</p>
+<pre class="r"><code>fit_data &lt;- fit_data %&gt;% 
+  filter(num_nonzero&gt;1 &amp; n_survey*avg_abund&gt;5)</code></pre>
+<p>The next step involves creating a prior distribution list for MCMC site updating. An informative prior for the survey methodology correction is obtained from analysis of another data set.</p>
+<pre class="r"><code>data(&quot;photoCorrection&quot;)
+photoCorrection %&gt;% mutate(log_ratio = log(OBLIQUE/VERTICAL)) -&gt; photoCorrection
+gamma_0 = photoCorrection %&gt;% summarize(mean(log_ratio)) %&gt;% as.double()
+gamma_se = photoCorrection %&gt;% summarize(sd(log_ratio)/sqrt(n())) %&gt;% as.double()
+
+obs.prior=list(gamma.mean=gamma_0, gamma.vcov=gamma_se^2)</code></pre>
+<p>For the linear trend at each site, a ridge regression penalty is used such that the linear trend will be shrunk back to zero if the data do not support a trend.</p>
+<p>Now we begin the MCMC sampling using the <code>site.simulate</code> function. This function performs the site augmentation and samples from the posterior predictive distribution of the count data.</p>
+<pre class="r"><code>set.seed(111) 
+fit_data = site.simulate(fit_data, 
+                         obs.formula=~obl-1,
+                         min.k = 3, obs.prior=obs.prior, 
+                         fit.only=F)
+#&gt; Fitting models to each site ...
+#&gt; Simulating missing observations ...</code></pre>
+<p>Now we add the regional designations to <code>fit_data</code> in order to summarize the counts by desired regions</p>
+<pre class="r"><code>fit_data = fit_data %&gt;% left_join(
+  wdpsNonpups %&gt;% select(SITE, REGION, REGION) %&gt;% distinct(), by=c(&quot;site&quot;=&quot;SITE&quot;)
+  ) %&gt;% mutate(TOTAL=&quot;TOTAL&quot;)</code></pre>
+<p>To demonstrate we choose to provide trends for the site region designations. First, the counts are aggregated by region:</p>
+<pre class="r"><code>region_data = fit_data %&gt;% ag.abundance(REGION)</code></pre>
+<p>The the abunance can be summarized with the following function call</p>
+<pre class="r"><code>region_summ = region_data %&gt;% ag.summ()</code></pre>
+<p>Which can then be visualized with with the <code>ggplot2</code> package</p>
+<pre class="r"><code>p1 = ggplot(data = region_summ %&gt;% filter(type==&quot;prediction&quot;)) +
+  geom_path(aes(y=estimate, x=time+1990)) + 
+  geom_ribbon(
+    aes(ymin=ci.lower, ymax=ci.upper,x=time+1990),alpha=0.2,fill=&quot;red&quot;
+    ) + facet_wrap(~REGION, ncol=2, scales = &quot;free_y&quot;) +
+  geom_pointrange(
+    aes(x=time+1990, y=estimate, ymin=ci.lower, ymax=ci.upper),
+    data=region_summ %&gt;% filter(type==&quot;realized&quot;)
+    )
+print(p1)</code></pre>
+<p>Finally, we get to the main purpose of the package, to estimate log-linear trends for the aggregated abundances. This is accomplished with the function <code>ag.trend</code></p>
+<pre class="r"><code>region_trends = region_data %&gt;% ag.trend(time.range=c(2000-1990, 2012-1990))
+region_trends %&gt;% select(-trend.sample, -trend.line)
+#&gt; # A tibble: 6 x 4
+#&gt;   REGION growth.estimate growth.lower growth.upper
+#&gt;   &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+#&gt; 1 C ALEU          -0.285       -1.32         0.596
+#&gt; 2 C GULF           1.53        -0.496        4.64 
+#&gt; 3 E ALEU           2.12         0.492        4.66 
+#&gt; 4 E GULF           5.59         2.65         8.33 
+#&gt; 5 W ALEU          -7.71        -9.34        -5.72 
+#&gt; 6 W GULF           3.39         1.99         5.00</code></pre>
+<p>The fitted trendlines can be added to the plots</p>
+<pre class="r"><code>tl = region_trends %&gt;% select(REGION, trend.line) %&gt;% unnest()
+p1 = p1 +
+  geom_path(aes(y=fitted, x=time+1990), data=tl, col=&quot;blue&quot;, lwd=2) +
+  xlab(&quot;Year&quot;) + ylab(&quot;Count&quot;) + theme_minimal()
+p1</code></pre>
+<p><img src="https://raw.githubusercontent.com/nmfs-fish-tools/nmfspalette/main/man/figures/noaa-fisheries-rgb-2line-horizontal-small.png" height="75" alt="NOAA Fisheries"></p>
+<p><a href="https://www.commerce.gov/">U.S. Department of Commerce</a> | <a href="https://www.noaa.gov">National Oceanographic and Atmospheric Administration</a> | <a href="https://www.fisheries.noaa.gov/">NOAA Fisheries</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

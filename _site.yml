@@ -1,0 +1,22 @@
+name: "agTrend"
+navbar:
+  title: "agTrend"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Documentation"
+      href: documentation.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/dsjohnson/agTrend.gam     
+    - icon: fa-paper-plane fa-lg
+      href: mailto:admin@cloudhadoop.com   
+output_dir: "."
+output:
+  html_document:
+    #theme: journal
+    highlight: textmate
+    css: extra.css
+    fig_caption: true
+    toc: true
+    toc_float: true
